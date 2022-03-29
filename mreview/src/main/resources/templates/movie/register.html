@@ -26,7 +26,7 @@
 
                 </div>
 
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <input type="button" class="btn btn-primary" value="submit"/>
 
         </form>
 
@@ -106,7 +106,7 @@
                         }
 
                         console.log(files[i]);
-                        formData.append("uplaodFiles", files[i]);
+                        formData.append("uploadFiles", files[i]);
                         appended = true;
                     }
 
@@ -135,6 +135,56 @@
                         }
                     }); // $.ajax
                 }); // end change event
+
+
+
+
+                $(".uploadResult").on("click", "li button", function(e){
+
+                    console.log('delete file');
+
+                    let targetFile = $(this).data("file");
+
+                    let targetLi = $(this).closest("li");
+
+                    $.ajax({
+                        url : '/removeFile' ,
+                        data : {fileName : targetFile} ,
+                        dataType : 'text' ,
+                        type : 'POST' ,
+                        success : function(result) {
+                            alert(result);
+
+                            targetLi.remove();
+                        }
+                    }); // $.ajax
+                });
+
+
+
+
+                //prevent submit
+                $(".btn-primary").on("click", function (e) {
+                    e.preventDefault();
+
+                    let str = '';
+
+                    $(".uploadResult li").each(function(i, obj) {
+                        let target = $(obj);
+
+                        str += "<input type='hidden' name='imageDTOList[" + i + "].imgName' value='" + target.data('name') + "'>";
+                        
+                        str += "<input type='hidden' name='imageDTOList[" + i + "].path' value='" + target.data('path') + "'>";
+                        
+                        str += "<input type='hidden' name='imageDTOList[" + i + "].uuid' value='" + target.data('uuid') + "'>";
+
+                    });
+
+                    // 태그들이 추가된 것을 확인한 후에 comment를 제거
+                    $(".box").html(str);
+
+                    $("form").submit();
+                });
 
 
             }); // document ready
