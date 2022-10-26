@@ -1,4 +1,7 @@
-package hellojpa;
+package jpabook.jpashop;
+
+import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.Order;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,12 +20,10 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUsername("C");
+            Order order = em.find(Order.class, 1L);
+            Long memberId = order.getMemberId();
 
-            System.out.println("========================");
-            em.persist(member);
-            System.out.println("member.id = " + member.getId());
+            Member member = em.find(Member.class, memberId);
 
             tx.commit();
 
