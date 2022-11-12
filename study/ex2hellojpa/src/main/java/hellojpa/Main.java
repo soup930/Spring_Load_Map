@@ -16,14 +16,6 @@ public class Main {
 
         try {
 
-            //updateRelation(em);
-            //deleteRelation(em);
-
-            Member member1 = em.find(Member.class, "member1");
-            member1.setTeam(null);
-
-            Team team1 = em.find(Team.class, "team1");
-            em.remove(team1);
 
             tx.commit();
 

@@ -1,62 +1,63 @@
 package jpabook.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "ORDER_ITEM")
 public class OrderItem {
 
     @Id @GeneratedValue
     @Column(name = "ORDER_ITEM_ID")
-    private Long id;
+    private Long orderItemId;
 
-    @Column(name = "ORDER_ID")
-    private Long orderId;
-    @Column(name = "ITEM_ID")
-    private Long itemId;
-    private int orderPrice;
-    private int count;
+    @ManyToOne
+    @JoinColumn(name = "ORDER_ITEM")
+    private Orders orders;
 
-    public Long getId() {
-        return id;
+    @ManyToOne
+    @JoinColumn(name = "ITEM_ID")
+    private Item item;
+
+    private Integer orderPrice;
+    private Integer count;
+
+    public Long getOrderItemId() {
+        return orderItemId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setOrderItemId(Long orderItemId) {
+        this.orderItemId = orderItemId;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 
-    public Long getItemId() {
-        return itemId;
+    public Item getItem() {
+        return item;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
-    public int getOrderPrice() {
+    public Integer getOrderPrice() {
         return orderPrice;
     }
 
-    public void setOrderPrice(int orderPrice) {
+    public void setOrderPrice(Integer orderPrice) {
         this.orderPrice = orderPrice;
     }
 
-    public int getCount() {
+    public Integer getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(Integer count) {
         this.count = count;
     }
 }
-

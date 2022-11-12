@@ -1,27 +1,30 @@
 package jpabook.jpashop.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "MEMBER")
 public class Member {
 
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue
     @Column(name = "MEMBER_ID")
-    private Long id;
+    private Long memberId;
     private String name;
     private String city;
     private String street;
     private String zipcode;
 
-    public Member() {
+    @OneToMany(mappedBy = "member")
+    private List<Orders> orders = new ArrayList<>();
+
+    public Long getMemberId() {
+        return memberId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setMemberId(Long memberId) {
+        this.memberId = memberId;
     }
 
     public String getName() {
@@ -54,5 +57,13 @@ public class Member {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public List<Orders> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Orders> orders) {
+        this.orders = orders;
     }
 }
