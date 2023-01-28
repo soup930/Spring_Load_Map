@@ -27,7 +27,6 @@ public class ItemController {
 
     @PostMapping("/items/new")
     public String create(BookForm form) {
-
         Book book = new Book();
         book.setName(form.getName());
         book.setPrice(form.getPrice());
@@ -46,7 +45,7 @@ public class ItemController {
         return "items/itemList";
     }
 
-    @GetMapping("/items/{itemId}/edit")
+    @GetMapping("items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
         Book item = (Book) itemService.findOne(itemId);
 
@@ -62,8 +61,8 @@ public class ItemController {
         return "items/updateItemForm";
     }
 
-    @PostMapping("/items/{itemId}/edit")
-    public String updateItem(@PathVariable long itemId, @ModelAttribute("form") BookForm form) {
+    @PostMapping("items/{itemId}/edit")
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
 
         /*Book book = new Book();
         book.setId(form.getId());
@@ -74,8 +73,6 @@ public class ItemController {
         book.setIsbn(form.getIsbn());*/
 
         itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
-
         return "redirect:/items";
     }
-
 }

@@ -23,7 +23,7 @@ public class OrderController {
     private final ItemService itemService;
 
     @GetMapping("/order")
-    public String createFrom(Model model) {
+    public String createForm(Model model) {
 
         List<Member> members = memberService.findMembers();
         List<Item> items = itemService.findItems();
@@ -41,6 +41,7 @@ public class OrderController {
 
         orderService.order(memberId, itemId, count);
         return "redirect:/orders";
+
     }
 
     @GetMapping("/orders")
@@ -56,4 +57,5 @@ public class OrderController {
         orderService.cancelOrder(orderId);
         return "redirect:/orders";
     }
+
 }
