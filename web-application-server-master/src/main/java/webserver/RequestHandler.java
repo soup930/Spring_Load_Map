@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
 
+import model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,30 +23,21 @@ public class RequestHandler extends Thread {
 
         try (InputStream in = connection.getInputStream(); OutputStream out = connection.getOutputStream()) {
             // TODO 사용자 요청에 대한 처리는 이 곳에 구현하면 된다.
-
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            // 요구사항 2. GET 방식으로 회원가입하기
             String line = "http start";
-            String host = "";
-            String htmlFile = "";
-
             while (!"".equals(line)) {
-                line = br.readLine();
-                if (line == null) {
-                    return;
+                if (line.contains("/user/create?")) {
+                    String tokens[] = line.split("=|&");
+                    for (String s :
+                            tokens) {
+                        System.out.println("s = " + s);
+                    }
                 }
-                System.out.println(line);
-
-                if (line.contains("Host:")) {
-                    String[] tokens = line.split(" ");
-                    host = tokens[1];
-                }
-
-                if (line.contains("HTTP/1.1")) {
-                    String[] tokens = line.split(" ");
-                    htmlFile = tokens[1];
-                }
-
             }
+            // 요구사항 1. index.html 응답하기
+            String htmlFile = dispatcherFile(br);
+
 
             DataOutputStream dos = new DataOutputStream(out);
             byte[] body = Files.readAllBytes( new File("./webapp" + htmlFile).toPath() );
@@ -75,5 +67,35 @@ public class RequestHandler extends Thread {
         } catch (IOException e) {
             log.error(e.getMessage());
         }
+    }
+
+
+
+    private String dispatcherFile(BufferedReader br) throws IOException {
+
+        String line = "http start";
+        String host = "";
+        String htmlFile = "";
+
+        while (!"".equals(line)) {
+            line = br.readLine();
+            if (line == null) {
+                continue;
+            }
+            System.out.println(line);
+
+            if (line.contains("Host:")) {
+                String[] tokens = line.split(" ");
+                host = tokens[1];
+            }
+
+            if (line.contains("HTTP/1.1")) {
+                String[] tokens = line.split(" ");
+                htmlFile = tokens[1];
+            }
+
+        }
+
+        return htmlFile;
     }
 }
