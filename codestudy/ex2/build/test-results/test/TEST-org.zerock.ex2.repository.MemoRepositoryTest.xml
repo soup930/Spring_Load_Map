@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.zerock.ex2.repository.MemoRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-01-07T12:50:51" hostname="FLAME_TRINITY" time="0.255">
+  <properties/>
+  <testcase name="testQueryMethodWithPageable()" classname="org.zerock.ex2.repository.MemoRepositoryTest" time="0.255"/>
+  <system-out><![CDATA[21:50:47.360 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [MemoRepositoryTest]: using SpringBootContextLoader
+21:50:47.364 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [org.zerock.ex2.repository.MemoRepositoryTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+21:50:47.365 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [org.zerock.ex2.repository.MemoRepositoryTest]: MemoRepositoryTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+21:50:47.391 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using ContextCustomizers for test class [MemoRepositoryTest]: [DisableObservabilityContextCustomizer, PropertyMappingContextCustomizer, Customizer, ExcludeFilterContextCustomizer, DuplicateJsonObjectContextCustomizer, MockitoContextCustomizer, TestRestTemplateContextCustomizer]
+21:50:47.471 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\gitspace\codestudy\ex2\build\classes\java\main\org\zerock\ex2\Ex2Application.class]
+21:50:47.473 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration org.zerock.ex2.Ex2Application for test class org.zerock.ex2.repository.MemoRepositoryTest
+21:50:47.586 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners for test class [MemoRepositoryTest]: [ServletTestExecutionListener, DirtiesContextBeforeModesTestExecutionListener, ApplicationEventsTestExecutionListener, MockitoTestExecutionListener, DependencyInjectionTestExecutionListener, DirtiesContextTestExecutionListener, TransactionalTestExecutionListener, SqlScriptsTestExecutionListener, EventPublishingTestExecutionListener, RestDocsTestExecutionListener, MockRestServiceServerResetTestExecutionListener, MockMvcPrintOnlyOnFailureTestExecutionListener, WebDriverTestExecutionListener, MockWebServiceServerTestExecutionListener, ResetMocksTestExecutionListener]
+21:50:47.587 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: class [MemoRepositoryTest], class annotated with @DirtiesContext [false] with mode [null]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.0.1)
+
+2023-01-07T21:50:47.808+09:00  INFO 14456 --- [    Test worker] o.z.ex2.repository.MemoRepositoryTest    : Starting MemoRepositoryTest using Java 17.0.2 with PID 14456 (started by use77 in C:\gitspace\codestudy\ex2)
+2023-01-07T21:50:47.809+09:00  INFO 14456 --- [    Test worker] o.z.ex2.repository.MemoRepositoryTest    : No active profile set, falling back to 1 default profile: "default"
+2023-01-07T21:50:48.358+09:00  INFO 14456 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-07T21:50:48.408+09:00  INFO 14456 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interfaces.
+2023-01-07T21:50:48.802+09:00  INFO 14456 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-07T21:50:48.840+09:00  INFO 14456 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.6.Final
+2023-01-07T21:50:48.987+09:00  WARN 14456 --- [    Test worker] org.hibernate.orm.deprecation            : HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2023-01-07T21:50:49.090+09:00  INFO 14456 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-01-07T21:50:49.159+09:00  INFO 14456 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.mariadb.jdbc.Connection@25533bba
+2023-01-07T21:50:49.160+09:00  INFO 14456 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-01-07T21:50:49.193+09:00  INFO 14456 --- [    Test worker] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MariaDBDialect
+2023-01-07T21:50:49.756+09:00  INFO 14456 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-07T21:50:49.769+09:00  INFO 14456 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-07T21:50:49.969+09:00  WARN 14456 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-01-07T21:50:50.994+09:00  INFO 14456 --- [    Test worker] o.z.ex2.repository.MemoRepositoryTest    : Started MemoRepositoryTest in 3.365 seconds (process running for 4.455)
+Hibernate: 
+    select
+        m1_0.mno,
+        m1_0.memo_text 
+    from
+        tbl_memo m1_0 
+    where
+        m1_0.mno between ? and ? 
+    order by
+        m1_0.mno desc limit ?,
+        ?
+Hibernate: 
+    select
+        count(m1_0.mno) 
+    from
+        tbl_memo m1_0 
+    where
+        m1_0.mno between ? and ?
+Memo(mno=50, memoText=Sample...50)
+Memo(mno=49, memoText=Sample...49)
+Memo(mno=48, memoText=Sample...48)
+Memo(mno=47, memoText=Sample...47)
+Memo(mno=46, memoText=Sample...46)
+Memo(mno=45, memoText=Sample...45)
+Memo(mno=44, memoText=Sample...44)
+Memo(mno=43, memoText=Sample...43)
+Memo(mno=42, memoText=Sample...42)
+Memo(mno=41, memoText=Sample...41)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
