@@ -1,24 +1,29 @@
 package jpabook.jpashop.domain;
 
+import jpabook.jpashop.domain.base.BaseEntity;
+import jpabook.jpashop.domain.valuetype.Address;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "MEMBER")
 public class Member extends BaseEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "MEMBER_ID")
     private Long id;
+
+    @Column(name = "NAME")
+    private String name;
 
     @Embedded
     private Address address;
 
-    private String name;
-
     @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<Order>();
+    List<Order> orderList = new ArrayList<Order>();
 
     public Long getId() {
         return id;
@@ -36,11 +41,21 @@ public class Member extends BaseEntity {
         this.name = name;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public Address getAddress() {
+        return address;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setAddress(Address address) {
+        this.address = address;
     }
+
+    public void addOrders(Order order) {
+        order.setMember(this);  // 양방향 편집
+        this.orderList.add(order);
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
 }

@@ -1,13 +1,16 @@
 package jpabook.jpashop.domain;
 
+import jpabook.jpashop.domain.item.Item;
+
 import javax.persistence.*;
 
 @Entity
+@Table(name = "ORDER_ITEM")
 public class OrderItem {
 
     @Id
-    @GeneratedValue
     @Column(name = "ORDER_ITEM_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -17,10 +20,6 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ITEM_ID")
     private Item item;
-
-    private Integer orderPrice;
-
-    private Integer count;
 
     public Long getId() {
         return id;
@@ -44,21 +43,5 @@ public class OrderItem {
 
     public void setItem(Item item) {
         this.item = item;
-    }
-
-    public Integer getOrderPrice() {
-        return orderPrice;
-    }
-
-    public void setOrderPrice(Integer orderPrice) {
-        this.orderPrice = orderPrice;
-    }
-
-    public Integer getCount() {
-        return count;
-    }
-
-    public void setCount(Integer count) {
-        this.count = count;
     }
 }

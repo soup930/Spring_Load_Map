@@ -12,20 +12,13 @@ import java.util.List;
 public class JpaMain {
 
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpaShop");
         EntityManager em = emf.createEntityManager();
 
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
         try {
-
-            List<Object[]> resultList =
-                    em.createQuery("SELECT o.member, o.product, o.orderAmount FROM order o").getResultList();
-
-            for (Object[] row : resultList) {
-                Member member = (Member) row[0];
-            }
 
             tx.commit();
 

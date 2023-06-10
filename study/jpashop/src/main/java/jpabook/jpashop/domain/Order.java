@@ -1,8 +1,11 @@
 package jpabook.jpashop.domain;
 
+import jpabook.jpashop.domain.base.BaseEntity;
+import jpabook.jpashop.domain.enu.OrderStatus;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -10,46 +13,28 @@ import java.util.List;
 public class Order extends BaseEntity {
 
     @Id
-    @GeneratedValue
     @Column(name = "ORDER_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "MEMBER_ID")
-    private Member member;      // 주문회원
+    private Member member;
+
+    @Column(name = "ORDER_DATE")
+    private LocalDateTime orderDate;
+
+    @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<OrderItem>();
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "DELIVERY_ID")
-    private Delivery delivery;  // 배송정보
+    private Delivery delivery;
 
-    private Date orderDate;     // 주문시간
-
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status; // 주문상태
-
-
-    // 연관관계 메소드
-    public void setMember(Member member) {
-        // 기존 관계 제거
-        if (this.member != null) {
-            this.member.getOrders().remove(this);
-        }
-        this.member = member;
-        member.getOrders().add(this);
-    }
-
-    public void addOrderItem(OrderItem orderItem) {
-        orderItems.add(orderItem);
-        orderItem.setOrder(this);
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-        delivery.setOrder(this);
-    }
 
     public Long getId() {
         return id;
@@ -63,19 +48,15 @@ public class Order extends BaseEntity {
         return member;
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
+    public void setMember(Member member) {
+        this.member = member;
     }
 
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public Date getOrderDate() {
+    public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(Date orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
@@ -87,5 +68,25 @@ public class Order extends BaseEntity {
         this.status = status;
     }
 
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
+    }
 
+    public void addOrderItems(OrderItem orderItem) {
+        orderItem.setOrder(this);
+        this.orderItems.add(orderItem);
+    }
+
+    public void setOrderItems(List<OrderItem> orderItems) {
+        this.orderItems = orderItems;
+    }
+
+    public Delivery getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 }

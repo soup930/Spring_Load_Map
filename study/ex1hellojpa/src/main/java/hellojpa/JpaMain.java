@@ -1,10 +1,10 @@
 package hellojpa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import hellojpa.embedded.Address;
+
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
 
@@ -16,13 +16,6 @@ public class JpaMain {
         tx.begin();
 
         try {
-
-            Member member = new Member();
-            member.setUsername("C");
-
-            System.out.println("========================");
-            em.persist(member);
-            System.out.println("member.id = " + member.getId());
 
             tx.commit();
 
